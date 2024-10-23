@@ -28,7 +28,7 @@ jobs:
             zreigz/ollama
           # generate Docker tags based on the following events/attributes
           tags: |
-            type=semver,pattern={{version}}
+            type=semver,pattern={{version}},suffix=-${{ matrix.models.model }}
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
       - name: Set up Docker Buildx
@@ -45,7 +45,7 @@ jobs:
           context: "."
           file: "./dockerfiles/ollama/base.Dockerfile"
           push: true
-          tags: ${{ matrix.models.model }}-${{ steps.meta.outputs.tags }}
+          tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           platforms: linux/amd64,linux/arm64
           build-args: |
