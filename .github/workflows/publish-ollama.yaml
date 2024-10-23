@@ -45,7 +45,7 @@ jobs:
           context: "."
           file: "./dockerfiles/ollama/base.Dockerfile"
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
+          tags: ${{ matrix.models.model }}-${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           platforms: linux/amd64,linux/arm64
           build-args: |
